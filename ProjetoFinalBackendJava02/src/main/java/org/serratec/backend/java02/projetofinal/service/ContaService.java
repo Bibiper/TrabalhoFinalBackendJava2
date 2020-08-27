@@ -40,6 +40,7 @@ public class ContaService {
 	    }
 	}
 	
+	//FIXME Não deveria alterar o número da conta por um que já exista
 	public Conta alteracaoConta (Integer numero, Conta contaAlterada) throws ContaInvalida{
 		Conta encontrada = getConta(numero);
 		encontrada.setNumero(contaAlterada.getNumero());
@@ -59,6 +60,12 @@ public class ContaService {
 	
 	public Conta saque (Integer numero, Double valor) throws ValorInvalido, ContaInvalida{
 		Conta encontrada = getConta(numero);
+		/**
+		 * TODO 
+		 * 	Deveria existir uma Exception para cada tipo de erro:
+		 * 
+		 * 		SALDO INVALIDO e VALOR INVALIDO 
+		 */
 		if (encontrada.getSaldo() < valor) {
 			throw new ValorInvalido();
 		}else {
@@ -69,6 +76,7 @@ public class ContaService {
 
 	public Conta deposito (Integer numero, Double valor) throws ValorInvalido, ContaInvalida {
 		Conta encontrada = getConta(numero);
+		//TODO Este limite poderia ser configurado no arquivo application.properties 
 		if (valor < 50) {
 			throw new ValorInvalido();
 		}else {

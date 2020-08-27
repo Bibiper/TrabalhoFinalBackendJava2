@@ -16,9 +16,11 @@ public class ErrosController {
 				.build();
 	}
 	
+	//FIXME Deve retornar o status 400 BadRequest
 	@ExceptionHandler(ValorInvalido.class)
 	public ResponseEntity<String> trataValorInvalido(ValorInvalido exception){
 		String msg = "Esse valor não é válido";
+		//FIXME Aqui deveria retornar o status 400 BadRequest
 		return ResponseEntity.notFound()
 				.header("x.erro.msg", msg)
 				.build();
